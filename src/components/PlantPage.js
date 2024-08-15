@@ -16,10 +16,14 @@ function PlantPage() {
     return setPlantState([...plantState, newPlant])
   }
 
+  function passFiltered(state) {
+    setPlantState(state)
+  }
+
   return (
     <main>
       <NewPlantForm passNewPlant={passNewPlant}/>
-      <Search />
+      <Search passFiltered={passFiltered} plantState={plantState}/>
       <PlantList plantState={plantState}/>
     </main>
   );
