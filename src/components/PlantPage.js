@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import NewPlantForm from "./NewPlantForm";
 import PlantList from "./PlantList";
 import Search from "./Search";
+import UpdatePrice from "./UpdatePrice"
 
 function PlantPage() {
   const [plantState, setPlantState] = useState([])
@@ -20,11 +21,16 @@ function PlantPage() {
     setPlantState(state)
   }
 
+  function passNewPrice(state) {
+    setPlantState(state)
+  }
+
   return (
     <main>
       <NewPlantForm passNewPlant={passNewPlant}/>
       <Search passFiltered={passFiltered} plantState={plantState}/>
       <PlantList plantState={plantState}/>
+      <UpdatePrice passNewPrice={passNewPrice} plantState={plantState}/>
     </main>
   );
 }

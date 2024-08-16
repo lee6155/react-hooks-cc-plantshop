@@ -14,8 +14,6 @@ function NewPlantForm({passNewPlant}) {
     })
   }
 
-  const [newPlant, setNewPlant] = useState([])
-
   function handleSubmit (event) {
     event.preventDefault()
     const formInfo2 = {
