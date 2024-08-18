@@ -20,7 +20,7 @@ function UpdatePrice ({ passNewPrice, plantState }) {
             price: newPrice.price
         }
         
-        plantState.map(function(plant){
+        plantState.forEach(function(plant){
             if(plant.name.toLowerCase() === newPrice2.name.toLowerCase()) {
                 fetch(`http://localhost:6001/plants/${plant.id}`, {
                     method: "PATCH",
@@ -36,7 +36,7 @@ function UpdatePrice ({ passNewPrice, plantState }) {
                 .then(response => response.json())
                 .then(function(data){
                     let plantState2 = []
-                    plantState.map(function(plant){
+                    plantState.forEach(function(plant){
                         if(plant.id !== data.id) {
                             return plantState2.push(plant)
                         } else {

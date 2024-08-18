@@ -25,11 +25,17 @@ function PlantPage() {
     setPlantState(state)
   }
 
+
+  function passDeleted2(state) {
+    console.log(state)
+    setPlantState(state)
+  }
+
   return (
     <main>
       <NewPlantForm passNewPlant={passNewPlant}/>
       <Search passFiltered={passFiltered} plantState={plantState}/>
-      <PlantList plantState={plantState}/>
+      <PlantList plantState={plantState} passDeleted2={passDeleted2}/>
       <UpdatePrice passNewPrice={passNewPrice} plantState={plantState}/>
     </main>
   );

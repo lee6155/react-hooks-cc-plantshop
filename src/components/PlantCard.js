@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 
-function PlantCard({ image, name, price }) {
+function PlantCard({ image, name, price, passDeleted }) {
   const [button, setButton] = useState(true)
 
   function handleClick(event){
     return setButton(!true)
+  }
+
+  function handleClick2(event){
+    let name = event.target.parentNode.childNodes[1].innerText
+    passDeleted(name)
   }
 
   return (
@@ -18,6 +23,7 @@ function PlantCard({ image, name, price }) {
       ) : (
         <button onClick={handleClick}>Out of Stock</button>
       )}
+      <button onClick={handleClick2}>Delete</button>
     </li>
   );
 }
