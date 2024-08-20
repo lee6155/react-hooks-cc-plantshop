@@ -27,7 +27,6 @@ function PlantPage() {
 
 
   function passDeleted2(state) {
-    console.log(state)
     setPlantState(state)
   }
 

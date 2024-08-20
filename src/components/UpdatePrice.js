@@ -53,8 +53,8 @@ function UpdatePrice ({ passNewPrice, plantState }) {
         <div className="new-plant-form">
             <h2>Update Plant Price</h2>
             <form onChange={handleChange} onSubmit={handleSubmit}>
-                <input type="text" name="name" placeholder="Plant name" />
-                <input type="number" name="price" step="0.01" placeholder="Price" />
+                <input type="text" name="name" placeholder="Plant Name" />
+                <input type="number" name="price" step="0.01" placeholder="price" />
                 <button type="submit">Update</button>
             </form>
         </div>
