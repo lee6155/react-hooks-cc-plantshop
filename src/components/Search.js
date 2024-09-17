@@ -1,26 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Search({passFiltered, plantState}) {
+function Search({passFiltered}) {
+
   function handleChange(event) {
-    let text = event.target.value
-    let newPlantState = []
-    plantState.filter(function(plant){
-      const plantInput = plant.name.substring(0, text.length)
-      if(plantInput.toLowerCase() === text.toLowerCase()) {
-        return newPlantState.push(plant)
-      }
-    })
-    passFiltered(newPlantState)
+    return passFiltered(event.target.value)
   }
 
   return (
     <div className="searchbar">
       <label htmlFor="search">Search Plants:</label>
-      <input onChange={handleChange}
+      <input
         type="text"
         id="search"
         placeholder="Type a name to search..."
-        //onChange={(e) => console.log("Searching...")}
+        onChange={handleChange}
       />
     </div>
   );
