@@ -6,7 +6,7 @@ import UpdatePrice from "./UpdatePrice"
 
 function PlantPage() {
   const [plantState, setPlantState] = useState([])
-  console.log(plantState)
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     fetch("http://localhost:6001/plants")
@@ -14,13 +14,9 @@ function PlantPage() {
     .then(data => setPlantState(data))
   },[])
 
-  function passFiltered(state) {
-    const newPlantState = plantState.filter(function(plant){
-      return plant.name.toLowerCase().includes(state.toLowerCase())
-    })
-
-    setPlantState([...newPlantState])
-  }
+  const newPlantState = plantState.filter(function(plant){
+    return plant.name.toLowerCase().includes(search.toLowerCase())
+  })
     
   function passNewPlant(newPlant) {
     return setPlantState([...plantState, newPlant])
@@ -37,8 +33,8 @@ function PlantPage() {
   return (
     <main>
       <NewPlantForm passNewPlant={passNewPlant}/>
-      <Search passFiltered={passFiltered}/>
-      <PlantList plantState={plantState} passDeleted2={passDeleted2}/>
+      <Search passFiltered={setSearch}/>
+      <PlantList passDeleted2={passDeleted2} newPlantState={newPlantState}/>
       <UpdatePrice passNewPrice={passNewPrice} plantState={plantState}/>
     </main>
   );

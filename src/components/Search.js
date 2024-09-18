@@ -13,6 +13,7 @@ function Search({passFiltered}) {
         type="text"
         id="search"
         placeholder="Type a name to search..."
+        // value={search}
         onChange={handleChange}
       />
     </div>
