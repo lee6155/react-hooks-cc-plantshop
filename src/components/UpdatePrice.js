@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 
 function UpdatePrice ({ passNewPrice, plantState }) {
-    const [newPrice, setNewPrice] = useState({
-        name: "",
-        price: 0
-    })
+    const [name, setName] = useState("")
+    const [price, setPrice] = useState("")
         
     function handleChange (event) {
         setNewPrice({

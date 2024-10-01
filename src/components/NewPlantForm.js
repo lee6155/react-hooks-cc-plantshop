@@ -1,25 +1,28 @@
 import React, {useState} from "react";
 
 function NewPlantForm({passNewPlant}) {
-  const [formInfo, setFormInfo] = useState({
-    name: "",
-    image: "",
-    price: 0
-  })
+  const [name, setName] = useState("")
+  const [image, setImage] = useState("")
+  const [price, setPrice] = useState("")
 
-  function handleChange (event) {
-    setFormInfo({
-      ...formInfo,
-      [event.target.name]: event.target.value
-    })
+  function handleChangeName (event) {
+    setName(event.target.value)
+  }
+
+  function handleChangeImage (event) {
+    setImage(event.target.value)
+  }
+
+  function handleChangePrice (event) {
+    setPrice(event.target.value)
   }
 
   function handleSubmit (event) {
     event.preventDefault()
-    const formInfo2 = {
-      name: formInfo.name,
-      image: formInfo.image,
-      price: formInfo.price
+    const formInfo = {
+      name: name,
+      image: image,
+      price: price
     }
 
     fetch("http://localhost:6001/plants", {
@@ -32,7 +35,7 @@ function NewPlantForm({passNewPlant}) {
         "image": "string",
         "price": "number"
       },
-      body: JSON.stringify(formInfo2)
+      body: JSON.stringify(formInfo)
     })
     .then(response => response.json())
     .then(data => passNewPlant(data))
@@ -41,10 +44,10 @@ function NewPlantForm({passNewPlant}) {
   return (
     <div className="new-plant-form">
       <h2>New Plant</h2>
-      <form onSubmit={handleSubmit} onChange={handleChange}>
-        <input type="text" name="name" placeholder="Plant name" />
-        <input type="text" name="image" placeholder="Image URL" />
-        <input type="number" name="price" step="0.01" placeholder="Price" />
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="name" placeholder="Plant name" value={name} onChange={handleChangeName}/>
+        <input type="text" name="image" placeholder="Image URL" value={image} onChange={handleChangeImage}/>
+        <input type="number" name="price" step="0.01" placeholder="Price" value={price} onChange={handleChangePrice}/>
         <button type="submit">Add Plant</button>
       </form>
     </div>
