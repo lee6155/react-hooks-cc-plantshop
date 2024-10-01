@@ -22,8 +22,16 @@ function PlantPage() {
     return setPlantState([...plantState, newPlant])
   }
 
-  function passNewPrice(state) {
-    setPlantState(state)
+  function passPlantWithNewPrice(newPlant) {
+    let plantsUpdatedPrice = plantState.map(function(plant){
+      if(plant.id === newPlant.id) {
+        return newPlant
+      } else {
+        return plant
+      }
+    })
+
+    setPlantState(plantsUpdatedPrice)
   }
 
   function passDeleted2(state) {
@@ -35,7 +43,7 @@ function PlantPage() {
       <NewPlantForm passNewPlant={passNewPlant}/>
       <Search passFiltered={setSearch}/>
       <PlantList passDeleted2={passDeleted2} newPlantState={newPlantState}/>
-      <UpdatePrice passNewPrice={passNewPrice} plantState={plantState}/>
+      <UpdatePrice passPlantWithNewPrice={passPlantWithNewPrice} plantState={plantState}/>
     </main>
   );
 }

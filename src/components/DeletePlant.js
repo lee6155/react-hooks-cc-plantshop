@@ -8,8 +8,6 @@ function DeletePlant(){
         setTest(name)
     }
 
-    console.log(test)
-
     return(
         <div>
             
