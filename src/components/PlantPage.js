@@ -34,8 +34,12 @@ function PlantPage() {
     setPlantState(plantsUpdatedPrice)
   }
 
-  function passDeleted2(state) {
-    setPlantState(state)
+  function passDeleted2(deletedPlant) {
+    let plantsExclDeleted = plantState.filter(function(plant) {
+      return plant.id !== deletedPlant.id
+    })
+
+    setPlantState(plantsExclDeleted)
   }
 
   return (

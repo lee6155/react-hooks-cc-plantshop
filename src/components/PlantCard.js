@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 
-function PlantCard({ image, name, price, passDeleted }) {
+function PlantCard({ id, image, name, price, passDeleted }) {
   const [button, setButton] = useState(true)
 
   function handleClick(event){
     return setButton(!true)
   }
 
-  function handleClick2(event){
-    let name = event.target.parentNode.childNodes[1].innerText
-    passDeleted(name)
+  function handleClick2(){
+    passDeleted(id)
   }
 
   return (
