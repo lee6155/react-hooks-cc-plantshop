@@ -4,26 +4,25 @@ import PlantList from "./PlantList";
 import Search from "./Search";
 
 function PlantPage() {
-  const [plantState, setPlantState] = useState([])
+  const [plants, setPlants] = useState([])
   const [search, setSearch] = useState("")
-  // rename plantState to just plants
 
   useEffect(() => {
     fetch("http://localhost:6001/plants")
     .then(response => response.json())
-    .then(data => setPlantState(data))
+    .then(data => setPlants(data))
   },[])
 
-  const newPlantState = plantState.filter(function(plant){
+  const newPlantState = plants.filter(function(plant){
     return plant.name.toLowerCase().includes(search.toLowerCase())
   })
     
   function newPlantFromInput(newPlant) {
-    return setPlantState([...plantState, newPlant])
+    return setPlants([...plants, newPlant])
   }
 
   function newPriceFromPlantCard(updatedPlantInfo) {
-    let updatedPlantArray = plantState.map(function(plant){
+    let updatedPlantArray = plants.map(function(plant){
       if(plant.id === updatedPlantInfo.id) {
         return updatedPlantInfo
       } else {
@@ -31,7 +30,7 @@ function PlantPage() {
       }
     })
 
-    setPlantState(updatedPlantArray)
+    setPlants(updatedPlantArray)
   }
 
   function plantToDeleteFromCard(idNumber) {
@@ -40,10 +39,10 @@ function PlantPage() {
     })
     .then(response => response.json())
     .then(function(data) {
-      let plantArrayExclDeleted = plantState.filter(function(plant) {
+      let plantArrayExclDeleted = plants.filter(function(plant) {
         return plant.id !== data.id
       })
-      setPlantState(plantArrayExclDeleted)
+      setPlants(plantArrayExclDeleted)
     })
   }
 

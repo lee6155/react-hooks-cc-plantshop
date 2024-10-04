@@ -4,11 +4,11 @@ function PlantCard({ id, image, name, price, plantToDeleteFromCard, newPriceFrom
   const [button, setButton] = useState(true)
   const [newPrice, setNewPrice] = useState(price)
 
-  function handleClick(event){
+  function handleClickInStock(){
     return setButton(!true)
   }
 
-  function handleClick2(){
+  function handleClickDelete(){
     plantToDeleteFromCard(id)
   }
       
@@ -41,11 +41,11 @@ function PlantCard({ id, image, name, price, plantToDeleteFromCard, newPriceFrom
       <p>Price: {price}</p>
       {button ? (
       //button above was originally just true
-        <button onClick={handleClick} className="primary">In Stock</button>
+        <button onClick={handleClickInStock} className="primary">In Stock</button>
       ) : (
-        <button onClick={handleClick}>Out of Stock</button>
+        <button onClick={handleClickInStock}>Out of Stock</button>
       )}
-      <button onClick={handleClick2}>Delete</button>
+      <button onClick={handleClickDelete}>Delete</button>
       <h4 id="updatePriceHeading">Update Plant Price</h4>
           <form onSubmit={handleSubmit}>
               <input type="number" name="price" step="0.01" placeholder="price" value={newPrice} onChange={handleChangePrice}/>
