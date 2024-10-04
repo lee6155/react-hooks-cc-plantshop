@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function PlantCard({ id, image, name, price, passDeleted, sendToPlantPage}) {
+function PlantCard({ id, image, name, price, plantToDeleteFromCard, newPriceFromPlantCard}) {
   const [button, setButton] = useState(true)
   const [newPrice, setNewPrice] = useState(price)
 
@@ -9,7 +9,7 @@ function PlantCard({ id, image, name, price, passDeleted, sendToPlantPage}) {
   }
 
   function handleClick2(){
-    passDeleted(id)
+    plantToDeleteFromCard(id)
   }
       
   function handleChangePrice (event) {
@@ -31,7 +31,7 @@ function PlantCard({ id, image, name, price, passDeleted, sendToPlantPage}) {
       body: JSON.stringify(newPriceObj)
       })
       .then(response => response.json())
-      .then(data => sendToPlantPage(data))
+      .then(data => newPriceFromPlantCard(data))
   }
 
   return (

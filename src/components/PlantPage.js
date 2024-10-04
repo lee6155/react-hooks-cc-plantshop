@@ -18,11 +18,11 @@ function PlantPage() {
     return plant.name.toLowerCase().includes(search.toLowerCase())
   })
     
-  function passNewPlant(newPlant) {
+  function newPlantFromInput(newPlant) {
     return setPlantState([...plantState, newPlant])
   }
 
-  function sendToPlantPage(updatedPlantInfo) {
+  function newPriceFromPlantCard(updatedPlantInfo) {
     let updatedPlantArray = plantState.map(function(plant){
       if(plant.id === updatedPlantInfo.id) {
         return updatedPlantInfo
@@ -34,19 +34,24 @@ function PlantPage() {
     setPlantState(updatedPlantArray)
   }
 
-  function passDeleted2(deletedPlant) {
-    let plantsExclDeleted = plantState.filter(function(plant) {
-      return plant.id !== deletedPlant.id
+  function plantToDeleteFromCard(idNumber) {
+    fetch(`http://localhost:6001/plants/${idNumber}`, {
+      method: "DELETE",
     })
-
-    setPlantState(plantsExclDeleted)
+    .then(response => response.json())
+    .then(function(data) {
+      let plantArrayExclDeleted = plantState.filter(function(plant) {
+        return plant.id !== data.id
+      })
+      setPlantState(plantArrayExclDeleted)
+    })
   }
 
   return (
     <main>
-      <NewPlantForm passNewPlant={passNewPlant}/>
-      <Search passFiltered={setSearch}/>
-      <PlantList passDeleted2={passDeleted2} newPlantState={newPlantState} sendToPlantPage={sendToPlantPage}/>
+      <NewPlantForm newPlantFromInput={newPlantFromInput}/>
+      <Search dataFromSearch={setSearch}/>
+      <PlantList plantToDeleteFromCard={plantToDeleteFromCard} newPlantState={newPlantState} newPriceFromPlantCard={newPriceFromPlantCard}/>
     </main>
   );
 }

@@ -1,9 +1,9 @@
 import React from "react";
 
-function Search({passFiltered}) {
+function Search({ dataFromSearch }) {
 
   function handleChange(event) {
-    return passFiltered(event.target.value)
+    return dataFromSearch(event.target.value)
   }
 
   return (

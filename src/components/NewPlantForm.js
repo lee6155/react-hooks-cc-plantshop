@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function NewPlantForm({passNewPlant}) {
+function NewPlantForm({ newPlantFromInput }) {
   const [name, setName] = useState("")
   const [image, setImage] = useState("")
   const [price, setPrice] = useState("")
@@ -38,7 +38,7 @@ function NewPlantForm({passNewPlant}) {
       body: JSON.stringify(formInfo)
     })
     .then(response => response.json())
-    .then(data => passNewPlant(data))
+    .then(data => newPlantFromInput(data))
   }
 
   return (
