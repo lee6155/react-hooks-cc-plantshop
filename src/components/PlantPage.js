@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import NewPlantForm from "./NewPlantForm";
 import PlantList from "./PlantList";
 import Search from "./Search";
-import UpdatePrice from "./UpdatePrice"
 
 function PlantPage() {
   const [plantState, setPlantState] = useState([])
   const [search, setSearch] = useState("")
+  // rename plantState to just plants
 
   useEffect(() => {
     fetch("http://localhost:6001/plants")
@@ -22,16 +22,16 @@ function PlantPage() {
     return setPlantState([...plantState, newPlant])
   }
 
-  function passPlantWithNewPrice(newPlant) {
-    let plantsUpdatedPrice = plantState.map(function(plant){
-      if(plant.id === newPlant.id) {
-        return newPlant
+  function sendToPlantPage(updatedPlantInfo) {
+    let updatedPlantArray = plantState.map(function(plant){
+      if(plant.id === updatedPlantInfo.id) {
+        return updatedPlantInfo
       } else {
         return plant
       }
     })
 
-    setPlantState(plantsUpdatedPrice)
+    setPlantState(updatedPlantArray)
   }
 
   function passDeleted2(deletedPlant) {
@@ -46,8 +46,7 @@ function PlantPage() {
     <main>
       <NewPlantForm passNewPlant={passNewPlant}/>
       <Search passFiltered={setSearch}/>
-      <PlantList passDeleted2={passDeleted2} newPlantState={newPlantState}/>
-      <UpdatePrice passPlantWithNewPrice={passPlantWithNewPrice} plantState={plantState}/>
+      <PlantList passDeleted2={passDeleted2} newPlantState={newPlantState} sendToPlantPage={sendToPlantPage}/>
     </main>
   );
 }

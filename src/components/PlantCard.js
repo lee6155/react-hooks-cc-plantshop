@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-function PlantCard({ id, image, name, price, passDeleted }) {
+function PlantCard({ id, image, name, price, passDeleted, sendToPlantPage}) {
   const [button, setButton] = useState(true)
+  const [newPrice, setNewPrice] = useState(price)
 
   function handleClick(event){
     return setButton(!true)
@@ -9,6 +10,28 @@ function PlantCard({ id, image, name, price, passDeleted }) {
 
   function handleClick2(){
     passDeleted(id)
+  }
+      
+  function handleChangePrice (event) {
+    setNewPrice(event.target.value)
+  }
+      
+  function handleSubmit (event) {
+    event.preventDefault()
+    const newPriceObj = {
+      name: name,
+      price: newPrice
+    }
+  
+    fetch(`http://localhost:6001/plants/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newPriceObj)
+      })
+      .then(response => response.json())
+      .then(data => sendToPlantPage(data))
   }
 
   return (
@@ -23,6 +46,11 @@ function PlantCard({ id, image, name, price, passDeleted }) {
         <button onClick={handleClick}>Out of Stock</button>
       )}
       <button onClick={handleClick2}>Delete</button>
+      <h4 id="updatePriceHeading">Update Plant Price</h4>
+          <form onSubmit={handleSubmit}>
+              <input type="number" name="price" step="0.01" placeholder="price" value={newPrice} onChange={handleChangePrice}/>
+              <button type="submit">Update</button>
+          </form>
     </li>
   );
 }
